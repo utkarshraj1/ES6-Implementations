@@ -162,3 +162,87 @@ const balString = '{{{{}}}}';
 let balancedStatus = balancedOrNot(balString);
 console.log(`The string ${balString} is ${balancedStatus === 0 ? 'Balanced' : 'Not Balanced'}.`);
 
+
+// Destructuring
+
+// Obj
+const car = {
+    name: 'Superb',
+    company: 'Skoda',
+    origin: 'Germany'
+};
+const bike = {
+    name: 'Apache RTR 160 4v',
+    company: 'TVS',
+    origin: 'India'
+};
+const truck = {
+    name: 'DT100',
+    company: 'Tata',
+    origin: 'India'
+}
+console.log(`Traditional : The car/bike ${bike.name} is manufactured by ${bike.company} in ${bike.origin}.`);
+const { name, company, origin } = truck;    // destructuring the obj
+console.log(`ES6 : The car/bike ${name} is manufactured by ${company} in ${origin}.`);
+
+// Obj Arguments in function
+const coin = {
+    cName: 'Ethereum',
+    cOrigin: 'UK',
+    cValue: '$134990'
+}
+function coinInfo({ cName, cOrigin, cValue }, { date }) {
+    return `Date: ${date} \nCoin: ${cName} \nOrigin: ${cOrigin} \nValue: ${cValue}`;
+}
+const info = coinInfo(coin, { date: '01/04/2022' });
+console.log(info);
+
+// Arrays
+const exams = [
+    'JEE-Main', 'JEE-Advanced', 'GATE', 'CAT', 'NET', 'CSE', 'GMAT', 'CAPF', 'IELTS', 'MAT'
+];
+
+//first exam in the list
+console.log('First Exam: ', exams[0]);
+const [e1] = exams;
+console.log('First Exam: ', e1);
+
+// Gateway to IIT
+console.log(`First qualify ${exams[0]} and then qualify ${exams[1]}.`);
+const [g1, g2] = exams;
+console.log(`First qualify ${g1} and then qualify ${g2}.`);
+
+// Get into iit and want to know how many exams I can give after graduation
+const pgArr = exams.slice(2, exams.length);
+console.log(`First qualify ${exams[0]} and then qualify ${exams[1]}. Now, we have ${pgArr}`);
+const [start1, start2, ...pgArrRefined] = exams;
+console.log(`First qualify ${start1} and then qualify ${start2}. Now, we have ${pgArrRefined}`);
+
+// Mixing destructuring of obj and array
+const companies = [
+    { company: 'Accenture', country: 'America' },
+    { company: 'Publicis Sapient', country: 'France' },
+    { company: 'Deloitte', country: 'UK' },
+    { company: 'ZS Associate', country: 'India' },
+];
+const [{ country }] = companies;
+console.log('The location of first company is :', country);
+
+const ps = {
+    name: 'Publicis Sapient',
+    locations: [
+        'India', 'UK', 'France', 'Mexico'
+    ]
+}
+const { locations: [place] } = ps;
+console.log(place);
+
+const numbers = [1, 2, 3];
+function double([head, ...rest]) {
+    if (!head) {
+        return [];
+    }
+    return [2 * head, ...double(rest)]
+}
+const doubledNumbers = double(numbers);
+console.log(doubledNumbers);
