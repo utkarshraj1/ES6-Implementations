@@ -246,3 +246,40 @@ function double([head, ...rest]) {
 }
 const doubledNumbers = double(numbers);
 console.log(doubledNumbers);
+
+// Generators
+
+const testingTeam = {
+    lead: 'Prem',
+    analyst: 'Rohit',
+    [Symbol.iterator]: function* () {
+        yield this.lead;
+        yield this.analyst;
+    }
+};
+const engineeringTeam = {
+    testingTeam,
+    lead: 'Utkarsh',
+    analyst: 'Ronak',
+    associate: 'Shiraz',
+    [Symbol.iterator]: function* () {
+        yield this.lead;
+        yield this.analyst;
+        yield this.associate;
+        yield* testingTeam;
+    }
+};
+// function* engineeringTeamIterator(team) {
+//     yield team.lead;
+//     yield team.analyst;
+//     yield team.associate;
+//     yield* testingTeam;
+// }
+let arr = [];
+// for (let member of engineeringTeamIterator(engineeringTeam)) {
+//     arr.push(member);
+// }
+for (let member of engineeringTeam) {
+    arr.push(member);
+}
+console.log('The team members are: ', arr);
